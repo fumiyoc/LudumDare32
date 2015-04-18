@@ -6,28 +6,12 @@ var CommandOption = require('../prefabs/menu/commandOption');
 var Fight = require('../commands/fight');
 var Item = require('../commands/item');
 
-var panel;
-var commands = [];
-var lastPressed = 0;
-
 function Play() {}
 Play.prototype = {
 
   create: function() {
 
-    panel = new Panel(this.game, 0, this.game.height - 200, this.game.width, 200);
-    commands = [
-      new CommandOption(this.game, 20, this.game.height - 180, new Fight()),
-      new CommandOption(this.game, 20, this.game.height - 150, new Item())
-    ];
-
-    this.game.add.existing(panel);
-
-    commands[0].active(true);
-    commands.forEach(function(command) {
-      this.game.add.existing(command);
-    }.bind(this));
-
+    this.lastPressed = 0;
     this.game.input.keyboard.addKeyCapture(Phaser.Keyboard.UP);
     this.game.input.keyboard.addKeyCapture(Phaser.Keyboard.DOWN);
     this.game.input.keyboard.addKeyCapture(Phaser.Keyboard.SPACEBAR);
@@ -63,23 +47,36 @@ Play.prototype = {
     this.golem.animations.play('all');
 
     this.parallaxStage = new ParallaxStage(this.game, parallaxStageConfig);
+
+    this.panel = new Panel(this.game, 0, this.game.height - 200, this.game.width, 200);
+    this.commands = [
+      new CommandOption(this.game, 20, this.game.height - 180, new Fight()),
+      new CommandOption(this.game, 20, this.game.height - 150, new Item())
+    ];
+
+    this.game.add.existing(this.panel);
+
+    this.commands[0].active(true);
+    this.commands.forEach(function(command) {
+      this.game.add.existing(command);
+    }.bind(this));
   },
 
   update: function() {
 
     this.parallaxStage.update();
 
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && Date.now() - lastPressed > 150) {
-      cycleDownCommands();
-      lastPressed = Date.now();
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && Date.now() - this.lastPressed > 150) {
+      this.cycleDownCommands();
+      this.lastPressed = Date.now();
     }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && Date.now() - lastPressed > 150) {
-      cycleUpCommands();
-      lastPressed = Date.now();
+    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && Date.now() - this.lastPressed > 150) {
+      this.cycleUpCommands();
+      this.lastPressed = Date.now();
     }
-    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.ENTER) && Date.now() - lastPressed > 150) {
-      triggerActiveCommand.call(this);
-      lastPressed = Date.now();
+    else if (this.game.input.keyboard.isDown(Phaser.Keyboard.ENTER) && Date.now() - this.lastPressed > 150) {
+      this.triggerActiveCommand.call(this);
+      this.lastPressed = Date.now();
     }
   },
 
@@ -89,63 +86,63 @@ Play.prototype = {
 
   clickListener: function() {
     this.game.state.start('gameover');
+  },
+
+  cycleDownCommands: function() {
+
+    var idx = this.commands.reduce(function(value, command, i) {
+      if (command.active()) {
+        command.active(false);
+        return i + 1;
+      }
+      else {
+        command.active(false);
+        return value;
+      }
+    }, 0);
+
+    if (idx >= this.commands.length) {
+      idx = 0;
+    }
+
+    this.commands[idx].active(true);
+  },
+
+  cycleUpCommands: function() {
+
+    var idx = this.commands.reduce(function(value, command, i) {
+      if (command.active()) {
+        command.active(false);
+        return i - 1;
+      }
+      else {
+        command.active(false);
+        return value;
+      }
+    }, 0);
+
+    if (idx < 0) {
+      idx = this.commands.length - 1;
+    }
+
+    this.commands[idx].active(true);
+  },
+
+  triggerActiveCommand: function() {
+
+    var idx = this.commands.reduce(function(value, command, i) {
+      if (command.active()) {
+        return i;
+      }
+      else {
+        return value;
+      }
+    }, undefined);
+
+    if (idx !== undefined) {
+      this.game.events.onCommandTriggered.dispatch(this.commands[idx].command);
+    }
   }
 };
-
-function cycleDownCommands() {
-
-  var idx = commands.reduce(function(value, command, i) {
-    if (command.active()) {
-      command.active(false);
-      return i + 1;
-    }
-    else {
-      command.active(false);
-      return value;
-    }
-  }, 0);
-
-  if (idx >= commands.length) {
-    idx = 0;
-  }
-
-  commands[idx].active(true);
-}
-
-function cycleUpCommands() {
-
-  var idx = commands.reduce(function(value, command, i) {
-    if (command.active()) {
-      command.active(false);
-      return i - 1;
-    }
-    else {
-      command.active(false);
-      return value;
-    }
-  }, 0);
-
-  if (idx < 0) {
-    idx = commands.length - 1;
-  }
-
-  commands[idx].active(true);
-}
-
-function triggerActiveCommand() {
-
-  var idx = commands.reduce(function(value, command, i) {
-    if (command.active()) {
-      return i;
-    }
-    else {
-      return value;
-    }
-  }, undefined);
-
-  if (idx !== undefined) {
-    this.game.events.onCommandTriggered.dispatch(commands[idx].command);
-  }
-}
 
 module.exports = Play;
