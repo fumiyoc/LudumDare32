@@ -1,10 +1,8 @@
 'use strict';
-
 var InfiniteScroller = function(game, x, y, textureName, speed) {
-	Phaser.Sprite.call(this, game, 0, 0)
 	this.game = game;
   this.sprite = this.game.add.sprite(0, 0, textureName);
-  this.altSprite = this.game.add.sprite(this.sprite.width, 0, textureName);
+  this.altSprite = this.game.add.sprite(this.sprite.width + game.width, 0, textureName);
   this.currentSprite = this.sprite;
   this.stagedSprite = this.altSprite;
 
@@ -15,17 +13,26 @@ var InfiniteScroller = function(game, x, y, textureName, speed) {
   this.altSprite.scale.setTo(4, 4);
 
   this.scrollSpeed = speed;
+  this.paused = false;
 };
 
-InfiniteScroller.prototype = Object.create(Phaser.Sprite.prototype);
 InfiniteScroller.prototype.constructor = InfiniteScroller;
 
 InfiniteScroller.prototype.update = function() {
-	this.sprite.x -= this.scrollSpeed;
-	this.altSprite.x -= this.scrollSpeed;
+	if (!this.paused) {
+		this.sprite.x -= this.scrollSpeed;
+		this.altSprite.x -= this.scrollSpeed;
 
-	checkForSwap.call(this, this.sprite, this.altSprite);
+		checkForSwap.call(this, this.sprite, this.altSprite);
+	};
+};
 
+InfiniteScroller.prototype.startScroll = function() {
+	this.pause = false;
+};
+
+InfiniteScroller.prototype.stopScroll = function() {
+	this.pause = true;
 };
 
 function checkForSwap(sprite, altSprite) {

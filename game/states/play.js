@@ -1,3 +1,4 @@
+'use strict';
 var ParallaxStage = require('../prefabs/ParallaxStage');
 
 'use strict';
@@ -31,6 +32,8 @@ Play.prototype = {
 
   update: function() {
     this.parallaxStage.update();
+
+    
   },
 
   clickListener: function() {
