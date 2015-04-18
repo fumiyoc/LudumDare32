@@ -28,12 +28,24 @@ Play.prototype = {
     this.golem.animations.play('all');
 
     this.parallaxStage = new ParallaxStage(this.game, parallaxStageConfig);
+
+    /* BS temp code follows */
+    this.timer = new Phaser.Timer(this.game);
+    this.timer.loop(3000, this.timerFired, this);
+    this.timer.start();
   },
 
   update: function() {
     this.parallaxStage.update();
+        
+  },
 
-    
+  timerFired: function () {
+    if (this.parallaxStage.paused) {
+      this.parallaxStage.startScroll();
+    } else {
+      this.parallaxStage.stopScroll();
+    };
   },
 
   clickListener: function() {
