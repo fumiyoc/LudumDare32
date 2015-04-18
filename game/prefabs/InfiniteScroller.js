@@ -16,6 +16,7 @@ var InfiniteScroller = function(game, x, y, textureName, speed) {
   this.paused = false;
 };
 
+
 InfiniteScroller.prototype.constructor = InfiniteScroller;
 
 InfiniteScroller.prototype.update = function() {
