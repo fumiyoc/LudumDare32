@@ -24,15 +24,15 @@ InfiniteScroller.prototype.update = function() {
 		this.altSprite.x -= this.scrollSpeed;
 
 		checkForSwap.call(this, this.sprite, this.altSprite);
-	};
+	}
 };
 
 InfiniteScroller.prototype.startScroll = function() {
-	this.pause = false;
+	this.paused = false;
 };
 
 InfiniteScroller.prototype.stopScroll = function() {
-	this.pause = true;
+	this.paused = true;
 };
 
 function checkForSwap(sprite, altSprite) {
