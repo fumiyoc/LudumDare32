@@ -16,4 +16,16 @@ ParallaxStage.prototype.update = function () {
 	});
 }
 
+ParallaxStage.prototype.startScroll = function () {
+	this.layers.forEach(function (layer) {
+		layer.startScroll();
+	});
+}
+
+ParallaxStage.prototype.stopScroll = function () {
+	this.layers.forEach(function (layer) {
+		layer.stopScroll();
+	});
+}
+
 module.exports = ParallaxStage;
