@@ -19,6 +19,8 @@ Preload.prototype = {
     this.load.image('forestLights', 'assets/placeholder/parallax-forest-lights.png');
     this.load.image('forestMiddle', 'assets/placeholder/parallax-forest-middle-trees.png');
 
+    this.load.spritesheet('golem', 'assets/placeholder/Golem.png', 48, 56, 16);
+
   },
   create: function() {
     this.asset.cropEnabled = false;
