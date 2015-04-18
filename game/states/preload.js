@@ -12,7 +12,12 @@ Preload.prototype = {
 
     this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
     this.load.setPreloadSprite(this.asset);
-    this.load.image('yeoman', 'assets/yeoman-logo.png');
+
+    /* load the assets here */
+    this.load.image('forestBack', 'assets/placeholder/parallax-forest-back-trees.png');
+    this.load.image('forestFront', 'assets/placeholder/parallax-forest-front-trees.png');
+    this.load.image('forestLights', 'assets/placeholder/parallax-forest-lights.png');
+    this.load.image('forestMiddle', 'assets/placeholder/parallax-forest-middle-trees.png');
 
   },
   create: function() {
@@ -20,7 +25,7 @@ Preload.prototype = {
   },
   update: function() {
     if(!!this.ready) {
-      this.game.state.start('menu');
+      this.game.state.start('play');
     }
   },
   onLoadComplete: function() {
