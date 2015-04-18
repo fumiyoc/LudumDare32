@@ -5,3 +5,4 @@ dist
 *.log
 *.subime-project
 *.sublime-workspace
+.DS_Store
