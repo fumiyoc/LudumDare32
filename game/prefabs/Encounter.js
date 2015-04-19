@@ -12,7 +12,7 @@ var Encounter = function(game, tier, modifiers) {
 Encounter.prototype.constructor = Encounter;
 
 Encounter.prototype.start = function() {
-	startWalking.call(this);
+
 };
 
 Encounter.prototype.resolveCommand = function(command) {

@@ -5,6 +5,7 @@ var optionHeight = 30;
 
 function CommandList(game, parent) {
   Phaser.Group.call(this, game, parent, 'CommandList');
+  this.commandExecuted = new Phaser.Signal();
 }
 
 CommandList.MAX = 6;
@@ -23,6 +24,8 @@ CommandList.prototype.add = function(command) {
   if (this.length === 1) {
     this.setActive(this.getAt(0));
   }
+
+  command.executing.add(this._handleExecution, this);
 
   this._reposition();
 };
@@ -70,6 +73,10 @@ CommandList.prototype.choosePrev = function() {
 
 CommandList.prototype.getActiveCommand = function() {
   return this.cursor.command;
+};
+
+CommandList.prototype._handleExecution = function (e) {
+  this.commandExecuted.dispatch(e);
 };
 
 CommandList.prototype._reposition = function() {
