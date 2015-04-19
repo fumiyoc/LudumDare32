@@ -13,7 +13,7 @@ var InfiniteScroller = function(game, x, y, textureName, speed) {
   this.altSprite.scale.setTo(4, 4);
 
   this.scrollSpeed = speed;
-  this.paused = false;
+  this.paused = true;
 };
 
 
