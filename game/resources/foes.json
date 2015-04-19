@@ -1,0 +1,31 @@
+[
+	{
+		"name": "golem",
+		"sprite": {
+			"key": "golem",
+			"x": 460,
+			"y": 350,
+			"animations": [{
+				"name": "walk",
+				"frames": [0,1,2,3],
+				"frameRate": 4,
+				"loop": true
+			},{
+				"name": "fists",
+				"frames": [4,5,6,5],
+				"frameRate": 5,
+				"loop": false
+			},{
+				"name": "block",
+				"frames": [8,9,10,9],
+				"frameRate": 5,
+				"loop": false
+			},{
+				"name": "attack",
+				"frames": [12,13,14,13],
+				"frameRate": 5,
+				"loop": false
+			}]
+		}
+	}
+]

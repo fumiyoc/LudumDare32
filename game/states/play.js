@@ -5,6 +5,7 @@ var Menu = require('../prefabs/menu');
 var Fight = require('../commands/fight');
 var Item = require('../commands/item');
 var Special = require('../commands/special');
+var EncounterManager = require('../prefabs/EncounterManager');
 
 function Play() {}
 Play.prototype = {
@@ -45,6 +46,10 @@ Play.prototype = {
       this.menu.commands.getActiveCommand().execute();
     }, this);
 
+    this.encounterManager = new EncounterManager(this.game);
+    this.encounterManager.travel.add(this.travelHandler, this);
+    this.encounterManager.encounter.add(this.encounterHandler, this);
+    this.encounterManager.start();
     this.menu.commands.add(new Fight());
     this.menu.commands.add(new Item());
     this.menu.commands.add(new Special());
@@ -64,6 +69,14 @@ Play.prototype = {
 
   clickListener: function() {
     this.game.state.start('gameover');
+  },
+
+  travelHandler: function() {
+    this.parallaxStage.startScroll();
+  },
+
+  encounterHandler: function() {
+    this.parallaxStage.stopScroll();
   }
 };
 
