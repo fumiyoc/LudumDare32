@@ -1,8 +1,12 @@
 'use strict';
+var foes = require('../resources/foes');
+var Foe = require('./Foe');
+
 var Encounter = function(game, tier, modifiers) {
 	this.game = game;
-	this.foes = [];
 	this.globalModifiers = modifiers
+
+	this.foes = getFoes(game);
 };
 
 Encounter.prototype.constructor = Encounter;
@@ -15,20 +19,14 @@ Encounter.prototype.resolveCommand = function(command) {
 	// body...
 }
 
+function getFoes(game) {
+	var retval = [];
+	var foeIndex = Math.floor(Math.random() * foes.length);
 
-function startWalking () {
-	this.beginTravel.dispatch()
-	this.game.time.events.loop(5000, stopWalking, this);
-}
+	// there will be more than one maybe
+	retval.push(new Foe(game, foes[foeIndex]));
 
-function stopWalking () {
-	this.endTravel.dispatch();
-
-	startCombat.call();
-}
-
-function startCombat () {
-	// body...
+	return retval;
 }
 
 module.exports = Encounter;
