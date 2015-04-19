@@ -22,6 +22,7 @@ Preload.prototype = {
     this.load.image('forestMiddle', 'assets/placeholder/parallax-forest-middle-trees.png');
 
     this.load.spritesheet('golem', 'assets/placeholder/Golem.png', 48, 56, 16);
+    this.load.spritesheet('jug', 'assets/placeholder/jug.png', 63, 45);
     this.load.spritesheet('food', 'assets/Food-Icons-Floating.png', 32, 32);
 
     // Fonts
