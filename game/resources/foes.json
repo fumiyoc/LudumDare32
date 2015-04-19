@@ -4,13 +4,9 @@
 		"sprite": {
 			"key": "golem",
 			"x": 460,
-<<<<<<< HEAD
-			"y": 350,
+			"y": 150,
       "scaleX": 4,
       "scaleY": 4,
-=======
-			"y": 150,
->>>>>>> adding generic command
 			"animations": [{
 				"name": "walk",
 				"frames": [0,1,2,3],
