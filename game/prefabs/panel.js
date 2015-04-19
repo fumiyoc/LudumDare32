@@ -1,4 +1,4 @@
-var colors = require('../../resources/colors');
+var colors = require('../resources/colors');
 
 function Panel(game, x, y, w, h) {
 

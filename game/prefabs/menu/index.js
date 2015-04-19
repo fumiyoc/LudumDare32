@@ -1,4 +1,4 @@
-var Panel = require('./panel');
+var Panel = require('./../panel');
 var CommandList = require('./commandList');
 
 function Menu(game, x, y, w, h) {
