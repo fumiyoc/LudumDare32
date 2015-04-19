@@ -46,17 +46,21 @@ Play.prototype = {
       this.menu.commands.getActiveCommand().execute();
     }, this);
 
-    this.encounterManager = new EncounterManager(this.game);
-    this.encounterManager.travel.add(this.travelHandler, this);
-    this.encounterManager.encounter.add(this.encounterHandler, this);
-    this.encounterManager.start();
     this.menu.commands.add(new Fight());
     this.menu.commands.add(new Item());
     this.menu.commands.add(new Special());
 
+<<<<<<< HEAD
     for (var i = 0; i < 32; i++) {
       this.menu.items.add('carrot');
     }
+=======
+    var player = null; //placeholder, replace with real player
+    this.encounterManager = new EncounterManager(this.game, player, this.menu.commands);
+    this.encounterManager.traveling.add(this.travelHandler, this);
+    this.encounterManager.encountering.add(this.encounterHandler, this);
+    this.encounterManager.start();
+>>>>>>> encountering foes
   },
 
   update: function() {

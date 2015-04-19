@@ -1,14 +1,16 @@
 'use strict';
 
 var Foe = function(game, config) {
-  Phaser.Sprite.call(this, game, 100, 100, config.sprite.key, 0);
+  Phaser.Sprite.call(this, game, game.width, 100, config.sprite.key, 0);
 
-  // initialize your prefab here
-  config.sprite.animations.foreach(function (anim) {
+  config.sprite.animations.forEach(function (anim) {
 		this.animations.add(anim.name, anim.frames, anim.frameRate, anim.loop);
   }.bind(this));
 
+  this.scale.setTo(4, 4);
+  this.smoothed = false;
   this.intro = true;
+  this.game.add.existing(this);
 };
 
 Foe.prototype = Object.create(Phaser.Sprite.prototype);
