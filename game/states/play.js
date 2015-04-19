@@ -50,13 +50,11 @@ Play.prototype = {
     this.encounterManager.travel.add(this.travelHandler, this);
     this.encounterManager.encounter.add(this.encounterHandler, this);
     this.encounterManager.start();
-    this.menu.commands.add(new Fight());
-    this.menu.commands.add(new Item());
-    this.menu.commands.add(new Special());
 
-    for (var i = 0; i < 32; i++) {
-      this.menu.items.add('carrot');
-    }
+    // TODO: Commands should probably come from the player prefab or something...
+    [new Fight(), new Item(), new Special()].forEach(function(command) {
+      this.menu.commands.add(command);
+    }.bind(this));
   },
 
   update: function() {
