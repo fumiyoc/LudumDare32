@@ -5,6 +5,8 @@
 			"key": "golem",
 			"x": 460,
 			"y": 350,
+      "scaleX": 4,
+      "scaleY": 4,
 			"animations": [{
 				"name": "walk",
 				"frames": [0,1,2,3],
@@ -23,6 +25,31 @@
 			},{
 				"name": "attack",
 				"frames": [12,13,14,13],
+				"frameRate": 5,
+				"loop": false
+			}]
+		}
+	},{
+		"name": "jug",
+		"sprite": {
+			"key": "jug",
+			"x": 460,
+			"y": 350,
+      "scaleX": 4,
+      "scaleY": 4,
+			"animations": [{
+				"name": "idle",
+				"frames": [1,2,3,4],
+				"frameRate": 4,
+				"loop": true
+			},{
+				"name": "walk",
+				"frames": [8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+				"frameRate": 5,
+				"loop": true
+			},{
+				"name": "attack",
+				"frames": [5,6,7,6,7,6,7,8],
 				"frameRate": 5,
 				"loop": false
 			}]
