@@ -2,9 +2,7 @@
 
 var ParallaxStage = require('../prefabs/ParallaxStage');
 var Menu = require('../prefabs/menu');
-var Fight = require('../commands/fight');
-var Item = require('../commands/item');
-var Special = require('../commands/special');
+var Command = require('../commands/Command');
 var EncounterManager = require('../prefabs/EncounterManager');
 
 function Play() {}
@@ -33,9 +31,10 @@ Play.prototype = {
       this.menu.commands.getActiveCommand().execute();
     }, this);
 
-    this.menu.commands.add(new Fight());
-    this.menu.commands.add(new Item());
-    this.menu.commands.add(new Special());
+    this.menu.commands.add(new Command({name: 'claws'}));
+    this.menu.commands.add(new Command({name: 'teeth'}));
+    this.menu.commands.add(new Command({name: 'bork'}));
+    this.menu.commands.commandExecuted.add(this.commandHandler, this);
 
     var player = null; //placeholder, replace with real player
     this.encounterManager = new EncounterManager(this.game, player, this.menu.commands);
@@ -58,6 +57,10 @@ Play.prototype = {
 
   travelHandler: function() {
     this.parallaxStage.startScroll();
+  },
+
+  commandHandler: function(e) {
+    this.encounterManager.executeCommand(e);
   },
 
   encounterHandler: function() {

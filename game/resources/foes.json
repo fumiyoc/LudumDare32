@@ -4,7 +4,7 @@
 		"sprite": {
 			"key": "golem",
 			"x": 460,
-			"y": 350,
+			"y": 150,
       "scaleX": 4,
       "scaleY": 4,
 			"animations": [{
@@ -28,6 +28,12 @@
 				"frameRate": 5,
 				"loop": false
 			}]
+		},
+		stats: {
+			"power": 10,
+			"stamina": 15,
+			"health": 50,
+			"defense": 20
 		}
 	},{
 		"name": "jug",
