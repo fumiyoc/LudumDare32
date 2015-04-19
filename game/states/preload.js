@@ -22,10 +22,14 @@ Preload.prototype = {
     this.load.image('forestMiddle', 'assets/placeholder/parallax-forest-middle-trees.png');
 
     this.load.spritesheet('golem', 'assets/placeholder/Golem.png', 48, 56, 16);
+    this.load.spritesheet('jug', 'assets/placeholder/jug.png', 63, 45);
     this.load.spritesheet('food', 'assets/Food-Icons-Floating.png', 32, 32);
 
     // Fonts
     this.load.bitmapFont('8bit-light', 'assets/fonts/8bit_wonder-light.png', 'assets/fonts/8bit_wonder-light.fnt');
+    this.load.spritesheet('blockman', 'assets/placeholder/blockman.png', 25, 24);
+    this.load.spritesheet('tuna', 'assets/placeholder/tuna_sprite_all_5.png', 100, 50);
+
   },
 
   create: function() {
