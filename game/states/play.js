@@ -109,6 +109,10 @@ Play.prototype = {
     this.menu.commands.add(new Fight());
     this.menu.commands.add(new Item());
     this.menu.commands.add(new Special());
+
+    for (var i = 0; i < 32; i++) {
+      this.menu.items.add('carrot');
+    }
   },
 
   update: function() {
