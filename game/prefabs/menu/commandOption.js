@@ -4,14 +4,13 @@ var colors = require('../../resources/colors');
 function CommandOption(game, x, y, command) {
 
   this.command = command;
-  this.bmd = new Phaser.BitmapData(game, this.key, 100, 100);
+  this.bmd = new Phaser.BitmapData(game, this.key, 200, 16);
   this.bullet = new Phaser.BitmapText(game, 0, 4, '8bit-light', '0', 8);
   this.text = new Phaser.BitmapText(game, 15, 0, '8bit-light', this.command.text, 18);
 
   Phaser.Sprite.call(this, game, x, y, this.bmd);
 
   this.active(false);
-
   this.addChild(this.bullet);
   this.addChild(this.text);
 }

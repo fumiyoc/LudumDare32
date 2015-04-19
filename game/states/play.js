@@ -36,16 +36,18 @@ Play.prototype = {
     this.parallaxStage = new ParallaxStage(this.game, parallaxStageConfig);
 
     this.menu = new Menu(this.game, 0, this.game.height - 200, this.game.width, 200);
-    this.menu.commands.add(new Fight());
-    this.menu.commands.add(new Item());
-    this.menu.commands.add(new Special());
     this.game.add.existing(this.menu);
 
     this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN).onDown.add(this.menu.commands.chooseNext, this.menu.commands);
     this.game.input.keyboard.addKey(Phaser.Keyboard.UP).onDown.add(this.menu.commands.choosePrev, this.menu.commands);
+
     this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR).onDown.add(function() {
       this.menu.commands.getActiveCommand().execute();
     }, this);
+
+    this.menu.commands.add(new Fight());
+    this.menu.commands.add(new Item());
+    this.menu.commands.add(new Special());
   },
 
   update: function() {
